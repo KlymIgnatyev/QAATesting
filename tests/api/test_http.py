@@ -10,4 +10,15 @@ def test_first_request():
 @pytest.mark.http
 def test_second_request():
     r = requests.get('https://api.github.com/users/defunkt')
-    print(f"Response is {r.text}")
+    body = r.json()
+    headers = r.headers
+    assert body['name'] == 'Chris Wanstrath'
+    assert r.status_code == 200
+    assert headers["Server"] == 'github.com'
+
+
+@pytest.mark.http
+def test_status_code():
+    r = requests.get('http://api.github.com/users/klym')
+
+    assert r.status_code == 200
