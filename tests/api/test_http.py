@@ -4,21 +4,22 @@ import requests
 
 @pytest.mark.http
 def test_first_request():
-    r = requests.get('https://api.github.com/zen')
+    r = requests.get("https://api.github.com/zen")
     print(r.text)
+
 
 @pytest.mark.http
 def test_second_request():
-    r = requests.get('https://api.github.com/users/defunkt')
+    r = requests.get("https://api.github.com/users/defunkt")
     body = r.json()
     headers = r.headers
-    assert body['name'] == 'Chris Wanstrath'
+    assert body["name"] == "Chris Wanstrath"
     assert r.status_code == 200
-    assert headers["Server"] == 'github.com'
+    assert headers["Server"] == "github.com"
 
 
 @pytest.mark.http
 def test_status_code():
-    r = requests.get('http://api.github.com/users/klym')
+    r = requests.get("http://api.github.com/users/klym")
 
     assert r.status_code == 200
